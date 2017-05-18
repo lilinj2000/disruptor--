@@ -23,24 +23,31 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-cmake_minimum_required(VERSION 3.1.0)
+cmake_minimum_required(VERSION 2.8.12)
 
-execute_process(COMMAND ${PROJECT_SOURCE_DIR}../tools/semver
-  OUTPUT_VARIABLE SEMVER_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
-project(disruptor VERSION ${SEMVER_VERSION} LANGUAGES CXX)
+# execute_process(COMMAND ${PROJECT_SOURCE_DIR}../tools/semver
+#   OUTPUT_VARIABLE SEMVER_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
+project(disruptor C CXX)
 
-set(CMAKE_CXX_STANDARD 11)
+# set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-add_library(disruptor INTERFACE)
+# add_library(disruptor INTERFACE)
 include_directories("${PROJECT_SOURCE_DIR}")
 
 # options
 option(COVERALLS "Generate coverage data" OFF)
 option(COVERALLS_UPLOAD "Upload the generated coveralls json" OFF)
 
+set(home_3rd "$ENV{HOME}/3rd")
 # dependencies
-find_package(Boost 1.46.0 COMPONENTS unit_test_framework REQUIRED)
-include_directories(${Boost_INCLUDE_DIR})
+# find_package(Boost 1.46.0 COMPONENTS unit_test_framework REQUIRED)
+set(home_boost "${home_3rd}/boost")
+set(BOOST_INCLUDE_PATH "${home_boost}/include" CACHE STRING "boost include path")
+set(BOOST_LIB_PATH "${home_boost}/lib" CACHE STRING "boost lib path")
+include_directories(${BOOST_INCLUDE_PATH})
+link_directories(${BOOST_LIB_PATH})
+set(BOOST_LIBRARIES, "boost_unit_test_framework")
 
 # code coverage
 set(COVERAGE_MODUDLE_PATH ${PROJECT_SOURCE_DIR}/tools/coveralls-cmake/cmake)
@@ -64,25 +71,25 @@ endif()
 enable_testing()
 
 add_executable(sequence_test_bin test/sequence_test.cc)
-target_link_libraries(sequence_test_bin ${Boost_LIBRARIES})
+target_link_libraries(sequence_test_bin boost_unit_test_framework)
 add_test(sequence_test sequence_test_bin)
 
 add_executable(ring_buffer_test_bin test/ring_buffer_test.cc)
-target_link_libraries(ring_buffer_test_bin ${Boost_LIBRARIES})
+target_link_libraries(ring_buffer_test_bin boost_unit_test_framework)
 add_test(ring_buffer_test ring_buffer_test_bin)
 
 add_executable(wait_strategy_test_bin test/wait_strategy_test.cc)
-target_link_libraries(wait_strategy_test_bin ${Boost_LIBRARIES})
+target_link_libraries(wait_strategy_test_bin boost_unit_test_framework)
 add_test(wait_strategy_test wait_strategy_test_bin)
 
 add_executable(sequence_barrier_test_bin test/sequence_barrier_test.cc)
-target_link_libraries(sequence_barrier_test_bin ${Boost_LIBRARIES})
+target_link_libraries(sequence_barrier_test_bin boost_unit_test_framework)
 add_test(sequence_barrier_test sequence_barrier_test_bin)
 
 add_executable(claim_strategy_test_bin test/claim_strategy_test.cc)
-target_link_libraries(claim_strategy_test_bin ${Boost_LIBRARIES})
+target_link_libraries(claim_strategy_test_bin boost_unit_test_framework)
 add_test(claim_strategy_test claim_strategy_test_bin)
 
 add_executable(sequencer_test_bin test/sequencer_test.cc)
-target_link_libraries(sequencer_test_bin ${Boost_LIBRARIES})
+target_link_libraries(sequencer_test_bin boost_unit_test_framework)
 add_test(sequencer_test sequencer_test_bin)
