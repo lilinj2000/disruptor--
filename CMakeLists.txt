@@ -93,3 +93,6 @@ add_test(claim_strategy_test claim_strategy_test_bin)
 add_executable(sequencer_test_bin test/sequencer_test.cc)
 target_link_libraries(sequencer_test_bin boost_unit_test_framework)
 add_test(sequencer_test sequencer_test_bin)
+
+
+install (DIRECTORY disruptor DESTINATION include)
