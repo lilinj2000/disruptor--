@@ -96,3 +96,6 @@ add_test(sequencer_test sequencer_test_bin)
 
 
 install (DIRECTORY disruptor DESTINATION include)
+
+include (InstallRequiredSystemLibraries)
+include (CPack)
