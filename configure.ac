@@ -7,6 +7,10 @@ AC_PROG_CC
 
 # automake
 AM_INIT_AUTOMAKE([1.10 -Wall no-define foreign])
+# AM_INIT_AUTOMAKE
+
+# AC_CONFIG_MACRO_DIR([m4])
+m4_include([m4/ax_cxx_compile_stdcxx_11.m4])
 
 # Checks for header files.
 AC_CHECK_HEADERS([sys/time.h])
@@ -16,7 +20,9 @@ AC_HEADER_STDBOOL
 AC_C_CONST
 AC_TYPE_INT64_T
 AC_HEADER_TIME
-AC_CXX_COMPILE_STDCXX_0X
+
+AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
+# AC_CXX_COMPILE_STDCXX_0X
 
 # Checks for libraries.
 AC_CHECK_LIB(stdc++, [main])
@@ -25,7 +31,7 @@ AC_CHECK_LIB(rt, [main])
 # Checks for library functions.
 AC_CHECK_FUNCS([gettimeofday])
 
-AM_CXXFLAGS="$AM_CXXFLAGS -std=c++0x"
+# AM_CXXFLAGS="$AM_CXXFLAGS -std=c++0x"
 AM_LDFLAGS="$AM_LDFLAGS -pthread"
 AC_SUBST([AM_CXXFLAGS])
 AC_SUBST([AM_LDFLAGS])
