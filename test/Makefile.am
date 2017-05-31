@@ -9,6 +9,7 @@ AM_LDFLAGS = -L${BOOST_LIB_PATH} \
 			-lboost_unit_test_framework \
 			-lboost_timer \
 			-lboost_system \
+			-lboost_chrono \
 			@AM_LDFLAGS@
 
 check_PROGRAMS = sequencer_test ring_buffer_test
