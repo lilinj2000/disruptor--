@@ -66,6 +66,7 @@ class ProcessingSequenceBarrier : SequenceBarrierInterface {
 
     virtual void Alert() {
         alerted_.store(true, std::memory_order::memory_order_release);
+        wait_strategy_->SignalAllWhenBlocking();
     }
 
     virtual void ClearAlert() {
