@@ -8,6 +8,7 @@ disruptor_HEADERS = \
 				disruptor/claim_strategy.h \
 				disruptor/event_processor.h \
 				disruptor/event_publisher.h \
+				disruptor/exception_handler.h \
 				disruptor/exceptions.h \
 				disruptor/interface.h \
 				disruptor/ring_buffer.h \
