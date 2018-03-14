@@ -121,7 +121,7 @@ class PaddedLong : public MutableLong {
      int64_t padding_[SEQUENCE_PADDING_LENGTH];
 };
 
-int64_t GetMinimumSequence(
+inline int64_t GetMinimumSequence(
         const std::vector<Sequence*>& sequences) {
         int64_t minimum = LONG_MAX;
 

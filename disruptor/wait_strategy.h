@@ -360,7 +360,7 @@ class BusySpinStrategy :  public WaitStrategyInterface {
     DISALLOW_COPY_AND_ASSIGN(BusySpinStrategy);
 };
 
-WaitStrategyInterface* CreateWaitStrategy(WaitStrategyOption wait_option) {
+inline WaitStrategyInterface* CreateWaitStrategy(WaitStrategyOption wait_option) {
     switch (wait_option) {
         case kBlockingStrategy:
             return new BlockingStrategy();

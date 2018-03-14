@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'lilinj2000/dev:centos6'
+      image 'lilinj2000/dev:centos6.gcc'
     }
   }
 
@@ -21,5 +21,11 @@ cp -avr disruptor ${home_disruptor}/include
    	'''
       }
     }
+  }
+
+  post { 
+    always { 
+      cleanWs()
+      }
   }
 }

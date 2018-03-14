@@ -215,7 +215,7 @@ class MultiThreadedStrategy :  public ClaimStrategyInterface {
 };
 */
 
-ClaimStrategyInterface* CreateClaimStrategy(ClaimStrategyOption option,
+inline ClaimStrategyInterface* CreateClaimStrategy(ClaimStrategyOption option,
                                             const int& buffer_size) {
     switch (option) {
         case kSingleThreadedStrategy:
